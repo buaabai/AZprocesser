@@ -1,3 +1,8 @@
+`timescale 1ns/1ns
+`include "global_config.h"
+`include "nettype.h"
+`include "stddef.h"
+
 module bus_addr_dec(
 	s_addr,s0_cs_,s1_cs_,s2_cs_,s3_cs_,
 	s4_cs_,s5_cs_,s6_cs_,s7_cs_
