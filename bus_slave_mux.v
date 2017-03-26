@@ -77,3 +77,4 @@ module bus_slave_mux(
 			m_rdy_ = `DISABLE_;
 		end
 	end
+endmodule

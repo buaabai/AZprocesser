@@ -38,3 +38,4 @@ module bus_addr_dec(
 			`BUS_SLAVE_7: s7_cs_ = `ENABLE_;
 		endcase
 	end
+endmodule
