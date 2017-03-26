@@ -3,7 +3,8 @@
 `include "global_config.h"
 `include "nettype.h"
 `include "stddef.h"
-`define NGEATIVE_RESET
+`include "bus.h"
+`define NEGATIVE_RESET
 module bus_arbiter(
 		clk,reset,
 		m0_req_,m0_grnt_,
