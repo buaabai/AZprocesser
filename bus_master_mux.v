@@ -1,3 +1,7 @@
+`timescale 1ns/1ns
+`include "global_config.h"
+`include "nettype.h"
+`include "stddef.h"
 module bus_master_mux(
 	m0_addr,m0_as_,m0_rw,m0_wr_data,m0_grnt_,
 	m1_addr,m1_as_,m1_rw,m1_wr_data,m1_grnt_,
