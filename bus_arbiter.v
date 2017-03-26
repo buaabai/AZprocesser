@@ -1,5 +1,9 @@
 //总线仲裁器 轮询机制 round robin
 `timescale 1ns/1ns
+`include "global_config.h"
+`include "nettype.h"
+`include "stddef.h"
+`define NGEATIVE_RESET
 module bus_arbiter(
 		clk,reset,
 		m0_req_,m0_grnt_,
