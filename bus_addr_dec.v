@@ -2,6 +2,7 @@
 `include "global_config.h"
 `include "nettype.h"
 `include "stddef.h"
+`include "bus.h"
 
 module bus_addr_dec(
 	s_addr,s0_cs_,s1_cs_,s2_cs_,s3_cs_,

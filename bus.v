@@ -2,6 +2,8 @@
 `include "global_config.h"
 `include "nettype.h"
 `include "stddef.h"
+`include "bus.h"
+`define NEGATIVE_RESET
 module bus(
 	clk,reset,m0_req_,m1_req_,m2_req_,m3_req_,
 	m0_grnt_,m1_grnt_,m2_grnt_,m3_grnt_,

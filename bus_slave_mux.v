@@ -2,6 +2,7 @@
 `include "global_config.h"
 `include "nettype.h"
 `include "stddef.h"
+`include "bus.h"
 module bus_slave_mux(
 	s0_cs_,s0_rd_data_,s0_rdy_,
 	s1_cs_,s1_rd_data_,s1_rdy_,
