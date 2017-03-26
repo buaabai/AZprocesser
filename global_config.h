@@ -4,7 +4,7 @@
 	`define RESET_DISABLE 1'b0
 `endif
 
-`ifdef NGEATIVE_RESET
+`ifdef NEGATIVE_RESET
 	`define RESET_EDGE negedge
 	`define RESET_ENABLE 1'b0
 	`define RESET_DISABLE 1'b1
