@@ -45,7 +45,7 @@ module bus_arbiter(
 	always@(posedge clk or `RESET_EDGE reset)
 	begin
 		if(reset == `RESET_ENABLE)
-			oner <= #1 `BUS_OWNER_MASTER_0;
+			owner <= #1 `BUS_OWNER_MASTER_0;
 		else if
 		begin
 			case(owner)
