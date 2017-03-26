@@ -58,7 +58,7 @@ module bus_arbiter(
 					else if(m2_req_ == `ENABLE)
 						owner <= #1 `BUS_OWNER_MASTER_2;
 					else if(m3_req_ == `ENABLE)
-						owner <= #1 `BUS_OWNER_MASTER_3
+						owner <= #1 `BUS_OWNER_MASTER_3;
 				end
 				`BUS_OWNER_MASTER_1:
 				begin
@@ -69,7 +69,7 @@ module bus_arbiter(
 					else if(m3_req_ == `ENABLE)
 						owner <= #1 `BUS_OWNER_MASTER_3;
 					else if(m0_req_ == `ENABLE)
-						owner <= #1 `BUS_OWNER_MASTER_0；
+						owner <= #1 `BUS_OWNER_MASTER_0;
 				end
 				`BUS_OWNER_MASTER_2:
 				begin
@@ -80,7 +80,7 @@ module bus_arbiter(
 					else if(m0_req_ == `ENABLE)
 						owner <= #1 `BUS_OWNER_MASTER_0;
 					else if(m1_req_ == `ENABLE)
-						owner <= #1 `BUS_OWNER_MASTER_1；
+						owner <= #1 `BUS_OWNER_MASTER_1;
 				end
 				`BUS_OWNER_MASTER_3:
 				begin
@@ -91,7 +91,7 @@ module bus_arbiter(
 					else if(m1_req_ == `ENABLE)
 						owner <= #1 `BUS_OWNER_MASTER_1;
 					else if(m2_req_ == `ENABLE)
-						owner <= #1 `BUS_OWNER_MASTER_2；
+						owner <= #1 `BUS_OWNER_MASTER_2;
 				end
 			endcase
 		end
