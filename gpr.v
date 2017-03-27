@@ -4,6 +4,7 @@
 `include "global_config.h"
 `include "nettype.h"
 `include "stddef.h"
+`define NEGATIVE_RESET
 
 module gpr(
 	clk,reset,rd_addr_0,rd_addr_1,rd_data_0,rd_data_1,
