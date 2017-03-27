@@ -3,6 +3,7 @@
 `include "stddef.h"
 `include "cpu.h"
 `include "isa.h"
+`timescale 1ns/1ns
 
 module bus_if(
 	clk,reset,
@@ -108,6 +109,79 @@ module bus_if(
 				end
 			end
 		endcase
+	end
+	
+	always@(posedge clk or `RESET_EDGE reset)
+	begin
+		if(reset == `RESET_ENABLE)
+		begin
+			state <= #1 `BUS_IF_STATE_IDLE;
+			bus_req_ <= #1 `DISABLE_;
+			bus_addr <= #1 `WORD_ADDR_W'h0;
+			bus_as_ <= #1 `DISABLE_;
+			bus_rw <= #1 `READ;
+			bus_wr_data <= #1 `WORD_DATA_W'h0;
+			rd_buf <= #1 `WORD_DATA_W'h0;
+		end
+		else
+		begin
+			case(state)
+			`BUS_IF_STATE_IDLE:
+			begin
+				if((flush == `DISABLE) && (as_ == `ENABLE))
+				begin
+					if(s_index == `BUS_SLAVE_1)
+					begin
+						state <= #1 `BUS_IF_STATE_REQ;
+						bus_req_ <= #1 `ENABLE;
+						bus_addr <= #1 addr;
+						bus_rw <= #1 rw;
+						bus_wr_data <= #1 wr_data;
+					end
+				end
+			end
+			`BUS_IF_STATE_REQ:
+			begin
+				if(bus_grnt_ == `ENABLE)
+				begin
+					state <= #1 `BUS_IF_STATE_ACCESS;
+					bus_as_ <= #1 `ENABLE;
+				end
+			end
+			`BUS_IF_STATE_ACCESS:
+			begin
+				bus_as_ <= #1 `DISABLE;
+				if(bus_rdy_ == `ENABLE_)
+				begin
+					bus_req_ <= #1 `DISABLE_;
+					bus_addr <= #1 `WORD_ADDR_W'h0;
+					bus_rw <= #1 `READ;
+					bus_wr_data <= #1 `WORD_DATA_W'h0;
+					
+					if(bus_rw == `READ)
+					begin
+						rd_buf <= #1 bus_rd_data;
+					end
+					
+					if(stall == `ENABLE)
+					begin
+						state <= #1 `BUS_IF_STATE_STALL;
+					end
+					else
+					begin
+						state <= #1 `BUS_IF_STATE_IDLE;
+					end
+				end
+			end
+			`BUS_IF_STATE_STALL:
+			begin
+				if(stall == `DISABLE)
+				begin
+					state <= #1 `BUS_IF_STATE_IDLE;
+				end
+			end
+			endcase
+		end
 	end
 endmodule
 	
