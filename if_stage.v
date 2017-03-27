@@ -32,11 +32,35 @@ module if_stage(
 	output[29:0] spm_addr;
 	output spm_as_;
 	output spm_rw;
+	output[31:0] spm_wr_data;
 	
 	output bus_req_;
 	output[29:0] bus_addr;
 	output bus_as_;
 	output bus_rw;
 	output[31:0] bus_wr_data;
+	
+	wire as_,rw;
+	wire[31:0] wr_data;
+	wire[31:0] rd_data;
+	wire[29:0] addr;
+	
+	assign as_ = `ENABLE_;
+	assign rw_ = `READ;
+	assign wr_data = `WORD_DATA_W'h0;
+	
+	bus_if bus_if(.busy(busy),.spm_rd_data(spm_rd_data),
+		.spm_as_(spm_as_),.spm_rw(spm_rw),.spm_wr_data(spm_wr_data),
+		.bus_rd_data(bus_rd_data),.bus_rdy_(bus_rdy_),.bus_grnt_(bus_grnt_),
+		.bus_req_(bus_req_),.bus_addr(bus_addr),.bus_as_(bus_as_),
+		.bus_rw(bus_rw),.bus_wr_data(bus_wr_data),.clk(clk),.reset(reset),
+		.stall(stall),.flush(flush),.addr(addr),.as_(as_),.rw(rw),
+		.wr_data(wr_data),.rd_data(rd_data)
+	);
+	
+	if_reg if_reg(.clk(clk),.reset(reset),.stall(stall),.flush(flush),
+	.insn(rd_data),.new_pc(new_pc),.br_taken(br_taken),.br_addr(br_addr),
+	.if_pc(if_pc),.if_insn(if_insn),.if_en(if_en)
+	);
 	
 endmodule
