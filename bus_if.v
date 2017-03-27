@@ -130,7 +130,7 @@ module bus_if(
 			begin
 				if((flush == `DISABLE) && (as_ == `ENABLE))
 				begin
-					if(s_index == `BUS_SLAVE_1)
+					if(s_index != `BUS_SLAVE_1)
 					begin
 						state <= #1 `BUS_IF_STATE_REQ;
 						bus_req_ <= #1 `ENABLE;
