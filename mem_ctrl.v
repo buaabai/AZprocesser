@@ -46,9 +46,35 @@ module mem_ctrl(
 			case(ex_mem_op)
 				`MEM_OP_LDW:
 				begin
-					if(offset == )
+					if(offset == `BYTE_OFFSET_WORD)
+					begin
+						out = rd_data;
+						as_ = `ENABLE;
+					end
+					else
+					begin
+						miss_align = `ENABLE;
+					end
+				end
+				`MEM_OP_STW:
+				begin
+					if(offset == `BYTE_OFFSET_WORD)
+					begin
+						rw = `WRITE;
+						as_ = `ENABLE;
+					end
+					else
+					begin
+						miss_align = `ENABLE;
+					end
+				end
+				default:
+				begin
+					out = ex_out;
 				end
 			endcase
 		end
 	end
+
+endmodule
 	
