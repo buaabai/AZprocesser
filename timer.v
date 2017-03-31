@@ -120,4 +120,5 @@ module timer(clk,reset,cs_,as_,rw,addr,wr_data,
 			end
 		end
 	end
+endmodule
 	
