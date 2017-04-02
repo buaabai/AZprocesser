@@ -1,4 +1,5 @@
 //总线仲裁器 轮询机制 round robin
+`define NEGATIVE_RESET
 `timescale 1ns/1ns
 `include "global_config.h"
 `include "nettype.h"
@@ -46,7 +47,7 @@ module bus_arbiter(
 	begin
 		if(reset == `RESET_ENABLE)
 			owner <= #1 `BUS_OWNER_MASTER_0;
-		else if
+		else
 		begin
 			case(owner)
 				`BUS_OWNER_MASTER_0:
