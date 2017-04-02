@@ -1,4 +1,4 @@
-`ifnedf __STDDEF_HEADER__
+`ifndef __STDDEF_HEADER__
 	`define __STDDEF_HEADER__
 	
 	`define HIGH 1'b1
