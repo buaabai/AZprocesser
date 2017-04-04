@@ -1,9 +1,11 @@
+`define NEGATIVE_RESET
 `include "global_config.h"
 `include "nettype.h"
 `include "stddef.h"
 `include "cpu.h"
 `include "isa.h"
-`define NEGATIVE_RESET
+`include "rom.h"
+`include "spm.h"
 `timescale 1ns/1ns
 module ctrl(clk,reset,creg_rd_addr,creg_rd_data,exe_mode,irq,int_detect,
 	id_pc,mem_pc,mem_en,mem_br_flag,mem_ctrl_op,mem_dst_addr,mem_gpr_we_,
@@ -113,7 +115,7 @@ module ctrl(clk,reset,creg_rd_addr,creg_rd_data,exe_mode,irq,int_detect,
 			end
 			`CREG_ADDR_PRE_STATUS:
 			begin
-				creg_rd_data = {{`WORD_DATA_W-2{1'b0},pre_int_en,pre_exe_mode};
+				creg_rd_data = {{`WORD_DATA_W-2{1'b0}},pre_int_en,pre_exe_mode};
 			end
 			`CREG_ADDR_PC:
 			begin
@@ -231,3 +233,4 @@ module ctrl(clk,reset,creg_rd_addr,creg_rd_data,exe_mode,irq,int_detect,
 			end
 		end
 	end
+endmodule
