@@ -1,9 +1,9 @@
+`define NEGATIVE_RESET
 `include "global_config.h"
 `include "nettype.h"
 `include "stddef.h"
 `include "cpu.h"
 `include "isa.h"
-`define NEGATIVE_RESET
 `timescale 1ns/1ns
 
 module mem_stage(busy,spm_rd_data,spm_addr,spm_as_,spm_rw,
@@ -38,7 +38,7 @@ module mem_stage(busy,spm_rd_data,spm_addr,spm_as_,spm_rw,
 	output[31:0] spm_wr_data;
 	output bus_req_;
 	output[29:0] bus_addr;
-	output bus_as_；
+	output bus_as_;
 	output bus_rw;
 	output[31:0] bus_wr_data;
 	output[31:0] fwd_data;
