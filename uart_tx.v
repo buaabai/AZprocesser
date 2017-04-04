@@ -1,7 +1,9 @@
+`define NEGATIVE_RESET
 `include "global_config.h"
 `include "nettype.h"
 `include "stddef.h"
 `include "uart.h"
+`timescale 1ns/1ns
 
 module uart_tx(clk,reset,tx_start,tx_data,tx_busy,
 	tx_end,tx);
@@ -63,9 +65,9 @@ module uart_tx(clk,reset,tx_start,tx_data,tx_busy,
 								bit_cnt <= #1 `UART_BIT_CNT_START;
 								tx_end <= #1 `ENABLE;
 							end
-							default：
+							default:
 							begin
-								bit_cnt <= #1 bit_cnt + 1；
+								bit_cnt <= #1 bit_cnt + 1;
 								sh_reg <= #1 sh_reg >> 1'b1;
 								tx <= #1 sh_reg[`LSB];
 							end
