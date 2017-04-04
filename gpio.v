@@ -1,8 +1,8 @@
+`define NEGATIVE_RESET
 `include "global_config.h"
 `include "stddef.h"
 `include "nettype.h"
 `include "gpio.h"
-`define NEGATIVE_RESET
 `timescale 1ns/1ns
 
 module gpio(clk,reset,cs_,as_,rw,addr,wr_data,
@@ -23,8 +23,6 @@ module gpio(clk,reset,cs_,as_,rw,addr,wr_data,
 	reg[31:0] rd_data;
 	reg rdy_;
 	reg[17:0] gpio_out;
-	reg[15:0] io_out;
-	reg[15:0] io_dir;
 	
 	`ifdef GPIO_IO_CH
 		wire[`GPIO_IO_CH-1 : 0] io_in;
@@ -40,7 +38,7 @@ module gpio(clk,reset,cs_,as_,rw,addr,wr_data,
 		begin
 			for(i = 0;i < `GPIO_IO_CH; i = i + 1)
 			begin
-				io[i] = (io_dir[i] = `GPIO_DIR_IN) ? 1'bz : io_out[i];
+				io[i] = (io_dir[i] == `GPIO_DIR_IN) ? 1'bz : io_out[i];
 			end
 		end
 	`endif
