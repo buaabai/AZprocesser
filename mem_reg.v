@@ -1,9 +1,10 @@
+`define NEGATIVE_RESET
 `include "global_config.h"
 `include "stddef.h"
 `include "nettype.h"
 `include "cpu.h"
 `include "isa.h"
-`define NEGATIVE_RESET
+
 `timescale 1ns/1ns
 
 module mem_reg(
