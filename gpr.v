@@ -15,18 +15,19 @@ module gpr(
 	input clk,reset;
 	input[4:0] rd_addr_0,rd_addr_1;
 	input[31:0] wr_addr,wr_data;
+	input we_;
 	
 	output[31:0] rd_data_0,rd_data_1;
 	
 	reg[31:0] gpr[31:0];
-	integer[31:0] i;
+	integer i;
 	
 	assign rd_data_0 = ((we_ == `ENABLE_)&&(wr_addr == rd_addr_0))?
 						wr_data : gpr[rd_addr_0];
 	assign rd_data_1 = ((we_ == `ENABLE_)&&(wr_addr == rd_addr_1))?
 						wr_data : gpr[rd_addr_1];
 	
-	always@(posedge clk or `RESTE_EDGE reset)
+	always@(posedge clk or `RESET_EDGE reset)
 	begin
 		if(reset == `RESET_ENABLE)
 		begin
