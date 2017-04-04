@@ -1,3 +1,4 @@
+`define NEGATIVE_RESET
 `include "global_config.h"
 `include "nettype.h"
 `include "stddef.h"
@@ -17,10 +18,10 @@ module if_reg(
 	input[29:0] new_pc;
 	input br_taken;
 	input[29:0] br_addr;
-	input if_en;
+	output if_en;
 	
 	output[29:0] if_pc;
-	output[31:0] insn;
+	output[31:0] if_insn;
 	
 	reg[29:0] if_pc;
 	reg[31:0] if_insn;
