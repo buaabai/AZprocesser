@@ -1,8 +1,8 @@
+`define NEGATIVE_RESET
 `include "global_config.h"
 `include "nettype.h"
 `include "stddef.h"
 `include "uart.h"
-`define NEGATIVE_RESET
 `timescale 1ns/1ns
 
 module uart_ctrl(clk,reset,cs_,as_,rw,addr,wr_data,
@@ -31,12 +31,13 @@ module uart_ctrl(clk,reset,cs_,as_,rw,addr,wr_data,
 	reg irq_rx,irq_tx;
 	reg tx_start;
 	reg[7:0] tx_data;
+	reg rdy_;
 	
 	reg[7:0] rx_buf;
 	
 	always@(posedge clk or `RESET_EDGE reset)
 	begin
-		if(reset == `RESET_EDGE)
+		if(reset == `RESET_ENABLE)
 		begin
 			rd_data <= #1 `WORD_DATA_W'h0;
 			rdy_ <= #1 `DISABLE_;
@@ -81,8 +82,8 @@ module uart_ctrl(clk,reset,cs_,as_,rw,addr,wr_data,
 			begin
 				irq_rx <= #1 `ENABLE;
 			end
-			else if((cs == `ENABLE) && (as_ == `ENABLE_)
-				&& (rw == `WRITE) && (addr == ``UART_ADDR_STATUS))
+			else if((cs_ == `ENABLE_) && (as_ == `ENABLE_)
+				&& (rw == `WRITE) && (addr == `UART_ADDR_STATUS))
 			begin
 				irq_tx <= #1 wr_data[`UartCtrlIrqTx];
 			end
@@ -91,14 +92,14 @@ module uart_ctrl(clk,reset,cs_,as_,rw,addr,wr_data,
 			begin
 				irq_rx <= #1 `ENABLE;
 			end
-			else if((cs == `ENABLE) && (as_ == `ENABLE_)
-				&& (rw == `WRITE) && (addr == ``UART_ADDR_STATUS))
+			else if((cs_ == `ENABLE_) && (as_ == `ENABLE_)
+				&& (rw == `WRITE) && (addr == `UART_ADDR_STATUS))
 			begin
-				irq_rx <= #1 `wr_data[UartCtrlIrqRx];
+				irq_rx <= #1 wr_data[`UartCtrlIrqRx];
 			end
 			
-			if((cs == `ENABLE) && (as_ == `ENABLE_)
-				&& (rw == `WRITE) && (addr == ``UART_ADDR_DATA))
+			if((cs_ == `ENABLE_) && (as_ == `ENABLE_)
+				&& (rw == `WRITE) && (addr == `UART_ADDR_DATA))
 			begin
 				tx_start <= #1 `ENABLE;
 				tx_data <= #1 wr_data[`BYTE_MSB : `LSB];
