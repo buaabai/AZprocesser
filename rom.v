@@ -40,4 +40,5 @@ module rom(
 			end
 		end
 	end
+endmodule
 	
