@@ -1,8 +1,8 @@
+`define NEGATIVE_RESET
 `include "global_config.h"
 `include "nettype.h"
 `include "stddef.h"
 `include "timer.h"
-`define NEGATIVE_RESET
 `timescale 1ns/1ns
 
 module timer(clk,reset,cs_,as_,rw,addr,wr_data,
@@ -35,7 +35,7 @@ module timer(clk,reset,cs_,as_,rw,addr,wr_data,
 			rd_data <= #1 `WORD_DATA_W'h0;
 			rdy_ <= #1 `DISABLE_;
 			start <= #1 `DISABLE;
-			mode <= #1 TIMER_MODE_ONE_SHOT;
+			mode <= #1 `TIMER_MODE_ONE_SHOT;
 			irq <= #1 `DISABLE;
 			expr_val <= #1 `WORD_DATA_W'h0;
 			counter <= #1 `WORD_DATA_W'h0;
@@ -55,11 +55,11 @@ module timer(clk,reset,cs_,as_,rw,addr,wr_data,
 				&& (rw == `READ))
 			begin
 				case(addr)
-					`TIME_ADDR_CTRL:
+					`TIMER_ADDR_CTRL:
 					begin
 						rd_data <= #1 {{`WORD_DATA_W-2{1'b0}},mode,start};
 					end
-					`TIME_ADDR_INTR:
+					`TIMER_ADDR_INTR:
 					begin
 						rd_data <= #1{{`WORD_DATA_W-1{1'b0}},irq};
 					end
