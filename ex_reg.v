@@ -1,9 +1,10 @@
+`define NEGATIVE_RESET
 `include "global_config.h"
 `include "stddef.h"
 `include "nettype.h"
 `include "cpu.h"
 `include "isa.h"
-`define NEGATIVE_RESET
+
 `timescale 1ns/1ns
 module ex_reg(clk,reset,
 	alu_out,alu_of,
@@ -27,7 +28,7 @@ module ex_reg(clk,reset,
 	input id_gpr_we_;
 	input[2:0] id_exp_code;
 	
-	output[29:0] exp_pc;
+	output[29:0] ex_pc;
 	output ex_en;
 	output ex_br_flag;
 	output[1:0] ex_mem_op;
@@ -38,7 +39,7 @@ module ex_reg(clk,reset,
 	output[2:0] ex_exp_code;
 	output[31:0] ex_out;
 	
-	reg[29:0] exp_pc;
+	reg[29:0] ex_pc;
 	reg ex_en;
 	reg ex_br_flag;
 	reg[1:0] ex_mem_op;
