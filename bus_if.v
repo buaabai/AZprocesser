@@ -1,8 +1,10 @@
+`define NEGATIVE_RESET
 `include "global_config.h"
 `include "nettype.h"
 `include "stddef.h"
 `include "cpu.h"
 `include "isa.h"
+`include "bus.h"
 `timescale 1ns/1ns
 
 module bus_if(
@@ -36,9 +38,10 @@ module bus_if(
 	output[31:0] spm_wr_data;
 	
 	output bus_req_;
-	output[29:0] addr;
+	output[29:0] bus_addr;
 	output bus_as_,bus_rw;
 	output[31:0] bus_wr_data;
+	output[29:0] bus_addr;
 	
 	reg busy;
 	reg[31:0] rd_data;
@@ -48,6 +51,9 @@ module bus_if(
 	reg[1:0] state;
 	reg[31:0] rd_buf;
 	wire[2:0] s_index;
+	reg bus_rw;
+	reg[31:0] bus_wr_data;
+	reg[29:0] bus_addr;
 	
 	assign s_index = addr[`BusSlaveIndexLoc];
 	
