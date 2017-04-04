@@ -1,4 +1,4 @@
-ifndef __UART_HEADER__
+`ifndef __UART_HEADER__
 	`define __UART_HEADER__
 	
 	`define UART_DIV_RATE 260
