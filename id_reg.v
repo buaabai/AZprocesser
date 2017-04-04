@@ -1,10 +1,11 @@
+`define NEGATIVE_RESET
 `include "global_config.h"
 `include "stddef.h"
 `include "nettype.h"
 `include "cpu.h"
 `include "isa.h"
 `timescale 1ns/1ns
-`define NEGATIVE_RESET
+
 
 module id_reg(
 	clk,reset,
@@ -111,5 +112,5 @@ module id_reg(
 			end
 		end
 	end
-	
+endmodule	
 	
