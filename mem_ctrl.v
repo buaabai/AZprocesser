@@ -6,7 +6,7 @@
 
 module mem_ctrl(
 	ex_en,ex_mem_op,ex_mem_wr_data,ex_out,
-	rd_data,addr,as_,rw,wr,data,
+	rd_data,addr,as_,rw,wr_data,
 	out,miss_align
 );
 	input ex_en;
@@ -26,7 +26,7 @@ module mem_ctrl(
 	reg as_;
 	reg rw;
 	reg[31:0] out;
-	reg miss_align
+	reg miss_align;
 	
 	wire[1:0] offset;
 	
