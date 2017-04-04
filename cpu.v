@@ -68,7 +68,7 @@ module cpu(reset,clk,if_bus_rd_data,if_bus_rdy_,if_bus_grnt_,if_bus_req_,
 		.id_alu_in_1(id_alu_in_1),.id_br_flag(id_br_flag),.id_mem_op(id_mem_op),.id_mem_wr_data(id_mem_wr_data),
 		.id_ctrl_op(id_ctrl_op),.id_dst_addr(id_dst_addr),.id_gpr_we_(id_gpr_we_),.id_exp_code(id_exp_code),
 		.clk(clk),.reset(reset),.int_detect(int_detect),.stall(ex_stall),.flush(ex_flush),.ex_pc(ex_pc),.ex_en(ex_en),.ex_br_flag(ex_br_flag),
-		.ex_mem_op(ex_mem_op),ex_mem_wr_data(ex_mem_wr_data),.ex_ctrl_op(ex_ctrl_op),.ex_dst_addr(ex_dst_addr),.ex_gpr_we_(ex_gpr_we_),
+		.ex_mem_op(ex_mem_op),.ex_mem_wr_data(ex_mem_wr_data),.ex_ctrl_op(ex_ctrl_op),.ex_dst_addr(ex_dst_addr),.ex_gpr_we_(ex_gpr_we_),
 		.ex_exp_code(ex_exp_code),.ex_out(ex_out));
 		
 	mem_stage mem_stage(.reset(reset),.clk(clk),.fwd_data(mem_fwd_data),.ex_pc(ex_pc),.ex_en(ex_en),.ex_br_flag(ex_br_flag),
@@ -79,9 +79,11 @@ module cpu(reset,clk,if_bus_rd_data,if_bus_rdy_,if_bus_grnt_,if_bus_req_,
 		.bus_rd_data(mem_bus_rd_data),.bus_rdy_(mem_bus_rdy_),.bus_grnt_(mem_bus_grnt_),.bus_req_(mem_bus_req_),.bus_addr(mem_bus_addr),
 		.bus_as_(mem_bus_as_),.bus_rw(mem_bus_rw),.bus_wr_data(mem_bus_wr_data));
 	
-	ctrl ctrl(.reset(reset),.clk(clk),.id_pc(id_pc),.if_busy(if_busy),.if_stall(if_stall),.if_flush(if_flush),.new_pc(new_pc),.creg_rd_addr(creg_rd_addr),
-		.ld_hazard(ld_hazard),.exe_mode(exe_mode),.creg_rd_data(creg_rd_data),.id_stall(id_stall),.id_flush(id_flush),.int_detect(int_detect),.ex_stall(ex_stall),
-		.ex_flush(ex_flush),.mem_busy(mem_busy),.mem_stall(mem_stall),.mem_flush(mem_flush),.mem_pc(mem_pc),.mem_en(mem_en),mem_br_flag(mem_br_flag),
+	ctrl ctrl(.reset(reset),.clk(clk),.id_pc(id_pc),.if_busy(if_busy),.if_stall(if_stall),.if_flush(if_flush),
+		.new_pc(new_pc),.creg_rd_addr(creg_rd_addr),
+		.ld_hazard(ld_hazard),.exe_mode(exe_mode),.creg_rd_data(creg_rd_data),.id_stall(id_stall),.id_flush(id_flush),
+		.int_detect(int_detect),.ex_stall(ex_stall),
+		.ex_flush(ex_flush),.mem_busy(mem_busy),.mem_stall(mem_stall),.mem_flush(mem_flush),.mem_pc(mem_pc),.mem_en(mem_en),.mem_br_flag(mem_br_flag),
 		.mem_ctrl_op(mem_ctrl_op),.mem_dst_addr(mem_dst_addr),.mem_exp_code(mem_exp_code),.mem_out(mem_out),.irq(cpu_irq));
 		
 endmodule
