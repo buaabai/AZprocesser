@@ -9,14 +9,14 @@ module decoder(
 	if_pc,if_insn,if_en,
 	gpr_rd_data_0,gpr_rd_data_1,gpr_rd_addr_0,gpr_rd_addr_1,
 	id_en,id_dst_addr,id_gpr_we_,id_dst_addr,id_mem_op,
-	ex_en,ex_dst_addr,ex_gpr_we_,ex_fd_data,
+	ex_en,ex_dst_addr,ex_gpr_we_,ex_fwd_data,
 	mem_fwd_data,
 	exe_mode,creg_rd_data,creg_rd_addr,
 	alu_op,alu_in_0,alu_in_1,br_addr,br_taken,br_flag,
 	mem_op,mem_wr_data,ctrl_op,dst_addr,gpr_we_,exp_code,ld_hazard
 );
 
-	input if_en;
+	output if_en;
 	input[31:0] gpr_rd_data_0,gpr_rd_data_1;
 	
 	input id_en;
@@ -76,9 +76,9 @@ module decoder(
 	wire[`RegAddrBus] rc_addr = if_insn[`IsaRcAddrLoc];
 	wire[`IsaImmBus] imm = if_insn[`IsaImmLoc];
 	
-	wire[`WordDataBus] imm_s = {{`ISA_EXT_W{imm[`ISA_IMM_MSB]},imm}};
+	wire[`WordDataBus] imm_s = {{`ISA_EXT_W{imm[`ISA_IMM_MSB]}},imm};
 	
-	wire[`WordDataBus] imm_u = {{`ISA_EXT_W{1`b0}},imm};
+	wire[`WordDataBus] imm_u = {{`ISA_EXT_W{1'b0}},imm};
 	
 	assign gpr_rd_addr_0 = ra_addr;
 	assign gpr_rd_addr_1 = rb_addr;
@@ -99,7 +99,7 @@ module decoder(
 		if((id_en == `ENABLE) && (id_gpr_we_ == `ENABLE_)
 			&& (id_dst_addr == ra_addr))
 		begin
-			ra_data = ex_fd_data;
+			ra_data = ex_fwd_data;
 		end
 		else if((ex_en == `ENABLE) && (id_gpr_we_ == `ENABLE_)
 			&&(ex_dst_addr == ra_addr))
@@ -114,7 +114,7 @@ module decoder(
 		if((id_en == `ENABLE) && (id_gpr_we_ == `ENABLE_)
 			&& (id_dst_addr == rb_addr))
 		begin
-			rb_data = ex_fd_data;
+			rb_data = ex_fwd_data;
 		end
 		else if((ex_en == `ENABLE) && (id_gpr_we_ == `ENABLE_)
 			&& (ex_dst_addr == rb_addr))
@@ -161,7 +161,7 @@ module decoder(
 				dst_addr = rc_addr;
 				gpr_we_ = `ENABLE_;
 			end
-			ISA_OP_ANDI:
+			`ISA_OP_ANDI:
 			begin
 				alu_op = `ALU_OP_AND;
 				alu_in_1 = imm_u;
@@ -181,13 +181,13 @@ module decoder(
 			end
 			`ISA_OP_XORR:
 			begin
-				alu_op = ALU_OP_XOR;
+				alu_op = `ALU_OP_XOR;
 				dst_addr = rc_addr;
 				gpr_we_ = `ENABLE_;
 			end
 			`ISA_OP_XORI:
 			begin
-				alu_op = ALU_OP_XOR;
+				alu_op = `ALU_OP_XOR;
 				alu_in_1 = imm_u;
 				gpr_we_ = `ENABLE_;
 			end
@@ -202,7 +202,7 @@ module decoder(
 			begin
 				alu_op = `ALU_OP_ADDS;
 				alu_in_1 = imm_s;
-				gpr_we_ = ENABLE_;
+				gpr_we_ = `ENABLE_;
 			end
 			`ISA_OP_ADDUR:
 			begin
