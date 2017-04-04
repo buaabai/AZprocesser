@@ -1,8 +1,9 @@
+`define  POSITIVE_MEMORY
 `include "global_config.h"
 `include "nettype.h"
 `include "stddef.h"
 `include "spm.h"
-`define  POSITIVE_MEMORY
+
 
 module spm(
 	clk,if_spm_addr,if_spm_as_,if_spm_rw,if_spm_wr_data,
