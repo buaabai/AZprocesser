@@ -56,7 +56,7 @@ module alu(in_0,in_1,op,out,of);
 			end
 			`ALU_OP_SHLL:
 			begin
-				out = in_0 << in_1[`ShAmountLoc]
+				out = in_0 << in_1[`ShAmountLoc];
 			end
 			default:
 			begin
