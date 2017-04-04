@@ -1,8 +1,9 @@
+`define NEGATIVE_RESET
 `include "global_config.h"
 `include "nettype.h"
 `include "stddef.h"
 `include "uart.h"
-
+`timescale 1ns/1ns
 module uart_tx(clk,reset,rx_busy,rx_end,rx_data,rx);
 	input clk,reset;
 	input rx;
@@ -22,6 +23,8 @@ module uart_tx(clk,reset,rx_busy,rx_end,rx_data,rx);
 			`ENABLE : `DISABLE;
 	
 	always@(posedge clk or `RESET_EDGE reset)
+	begin
+	if(reset == `RESET_EDGE)
 	begin
 		rx_end <= #1 `DISABLE;
 		rx_data <= #1 `BYTE_DATA_W'h0;
@@ -70,6 +73,7 @@ module uart_tx(clk,reset,rx_busy,rx_end,rx_data,rx);
 				end
 			end
 		endcase
+	end
 	end
 
 endmodule
