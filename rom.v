@@ -1,9 +1,10 @@
+`define NEGATIVE_RESET
 `timescale 1ns/1ns
 `include "global_config.h"
 `include "nettype.h"
 `include "stddef.h"
 `include "rom.h"
-`define NEGATIVE_RESET
+
 module rom(
 	clk,reset,cs_,as_,addr,rd_data,rdy_
 );
