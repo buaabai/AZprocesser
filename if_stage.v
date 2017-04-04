@@ -8,7 +8,7 @@
 module if_stage(
 	clk,reset,stall,flush,new_pc,br_taken,br_addr,
 	if_pc,if_insn,if_en,
-	busy,bus_rd_data,spm_addr,spm_as_,spm_rw,spm_rd_data,
+	busy,spm_rd_data,spm_addr,spm_as_,spm_rw,spm_wr_data,
 	bus_rd_data,bus_rdy_,bus_grnt_,bus_req_,bus_addr,
 	bus_as_,bus_rw,bus_wr_data
 );
