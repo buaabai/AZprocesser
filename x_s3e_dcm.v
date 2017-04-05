@@ -1,0 +1,9 @@
+module x_s3e_dcm(CLKIN_IN,RST_IN,CLK0_OUT,CLK180_OUT,LOCKED_OUT);
+	input CLKIN_IN,RST_IN;
+	output CLK0_OUT,CLK180_OUT,LOCKED_OUT;
+	
+	assign CLK0_OUT = CLKIN_IN;
+	assign CLK180_OUT = ~CLKIN_IN;
+	assign LOCKED_OUT = ~RST_IN;
+	
+endmodule
