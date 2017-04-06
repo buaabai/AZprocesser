@@ -4,7 +4,7 @@
 `include "stddef.h"
 `include "uart.h"
 `timescale 1ns/1ns
-module uart_tx(clk,reset,rx_busy,rx_end,rx_data,rx);
+module uart_rx(clk,reset,rx_busy,rx_end,rx_data,rx);
 	input clk,reset;
 	input rx;
 	

@@ -11,7 +11,12 @@ module chip(reset,clk,clk_,uart_tx,uart_rx,gpio_in,gpio_out,gpio_io);
 	inout[15:0] gpio_io;
 	
 	wire irq_uart_rx,irq_uart_tx,irq_timer;
-	wire[4:0] cpu_irq = {{5{`DISABLE}},irq_uart_rx,irq_uart_tx,irq_timer};
+	wire[7:0] cpu_irq = {{5{`DISABLE}},irq_uart_rx,irq_uart_tx,irq_timer};
+	
+	wire[31:0] m_rd_data,m0_wr_data,m1_wr_data;
+	wire[29:0] m0_addr,m1_addr;
+	wire[31:0] mem_bus_wr_data;
+	
 	cpu cpu(.reset(reset),.clk(clk),.clk_(clk_),.cpu_irq(cpu_irq),.if_bus_rd_data(m_rd_data),
 		.if_bus_rdy_(m_rdy_),.if_bus_req_(m0_req_),.if_bus_addr(m0_addr),.if_bus_as_(m0_as_),
 		.if_bus_rw(m0_rw),.if_bus_wr_data(m0_wr_data),.if_bus_grnt_(m0_grnt_),

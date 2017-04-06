@@ -33,7 +33,7 @@ module bus_if(
 	
 	output[31:0] rd_data;
 	
-	output[29:0] spm_addr;
+	output[11:0] spm_addr;
 	output spm_as_,spm_rw;
 	output[31:0] spm_wr_data;
 	

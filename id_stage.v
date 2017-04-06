@@ -55,7 +55,7 @@ module id_stage(
 	wire gpr_we_;
 	wire[2:0] exp_code;
 	
-	decoder decoder(.pc(if_pc),.insn(if_insn),.gpr_rd_data_0(gpr_rd_data_0),
+	decoder decoder(.if_pc(if_pc),.if_insn(if_insn),.gpr_rd_data_0(gpr_rd_data_0),
 		.gpr_rd_data_1(gpr_rd_data_1),.gpr_rd_addr_0(gpr_rd_addr_0),.gpr_rd_addr_1(gpr_rd_addr_1),
 		.exe_mode(exe_mode),.creg_rd_addr(creg_rd_addr),.creg_rd_data(creg_rd_data),
 		.ex_fwd_data(ex_fwd_data),.ex_dst_addr(ex_dst_addr),.ex_gpr_we_(ex_gpr_we_),

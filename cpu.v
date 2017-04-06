@@ -26,7 +26,7 @@ module cpu(reset,clk,if_bus_rd_data,if_bus_rdy_,if_bus_grnt_,if_bus_req_,
 	output[29:0] mem_bus_addr;
 	output mem_bus_as_;
 	output mem_bus_rw;
-	output mem_bus_wr_data;
+	output[31:0] mem_bus_wr_data;
 	
 	wire if_busy,if_stall,if_flush;
 	wire[29:0] new_pc;
@@ -36,10 +36,28 @@ module cpu(reset,clk,if_bus_rd_data,if_bus_rdy_,if_bus_grnt_,if_bus_req_,
 	wire[31:0] if_insn;
 	wire if_en;
 	wire[31:0] if_spm_rd_data;
-	wire[29:0] if_spm_addr;
+	wire[11:0] if_spm_addr;
 	wire if_spm_as_;
 	wire if_spm_rw;
 	wire[31:0] if_spm_wr_data;
+
+	wire[31:0] mem_spm_rd_data,mem_spm_wr_data;
+	wire[11:0] mem_spm_addr;
+	wire[4:0] creg_rd_addr;
+	wire[31:0] creg_rd_data;
+	wire[31:0] mem_fwd_data;
+	wire[4:0] ex_dst_addr;
+	wire[31:0] ex_fwd_data;
+	wire[29:0] id_pc;
+	wire[3:0] id_alu_op;
+	wire[31:0] id_alu_in_0,id_alu_in_1;
+	wire[1:0] id_mem_op;
+	wire[31:0] id_mem_wr_data;
+	wire[1:0] id_ctrl_op;
+	wire[4:0] id_dst_addr;
+	wire[2:0] id_exp_code;
+	wire[31:0] gpr_rd_data_0,gpr_rd_data_1;
+	wire[4:0] gpr_rd_addr_0,gpr_rd_addr_1;
 	
 	if_stage if_stage(.reset(reset),.clk(clk),.bus_rd_data(if_bus_rd_data),
 		.bus_rdy_(if_bus_rdy_),.bus_grnt_(if_bus_grnt_),.bus_req_(if_bus_req_),

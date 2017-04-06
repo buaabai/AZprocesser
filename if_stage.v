@@ -44,6 +44,7 @@ module if_stage(
 	wire[31:0] wr_data;
 	wire[31:0] rd_data;
 	wire[29:0] addr;
+	wire[11:0] spm_addr;
 	
 	assign as_ = `ENABLE_;
 	assign rw_ = `READ;
@@ -55,7 +56,7 @@ module if_stage(
 		.bus_req_(bus_req_),.bus_addr(bus_addr),.bus_as_(bus_as_),
 		.bus_rw(bus_rw),.bus_wr_data(bus_wr_data),.clk(clk),.reset(reset),
 		.stall(stall),.flush(flush),.addr(addr),.as_(as_),.rw(rw),
-		.wr_data(wr_data),.rd_data(rd_data)
+		.wr_data(wr_data),.rd_data(rd_data),.spm_addr(spm_addr)
 	);
 	
 	if_reg if_reg(.clk(clk),.reset(reset),.stall(stall),.flush(flush),

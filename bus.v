@@ -70,7 +70,7 @@ module bus(
 	.s7_cs_(s7_cs_)
 	);
 	
-	bus_slave_mux slavemux(.s1_cs_(s1_cs_),.s2_cs_(s2_cs_),.s3_cs_(s3_cs_),
+	bus_slave_mux slavemux(.s0_cs_(.s0_cs_),.s1_cs_(s1_cs_),.s2_cs_(s2_cs_),.s3_cs_(s3_cs_),
 	.s4_cs_(s4_cs_),.s5_cs_(s5_cs_),.s6_cs_(s6_cs_),
 	.s7_cs_(s7_cs_),.s0_rd_data(s0_rd_data),.s1_rd_data(s1_rd_data),
 	.s2_rd_data(s2_rd_data),.s3_rd_data(s3_rd_data),.s4_rd_data(s4_rd_data),
