@@ -299,7 +299,7 @@ module decoder(
 				alu_op = `ALU_OP_ADDU;
 				alu_in_1 =imm_s;
 				mem_op = `MEM_OP_LDW;
-				gpr_we_ = `ENABLE;
+				gpr_we_ = `ENABLE_;
 			end
 			`ISA_OP_STW:
 			begin
@@ -318,7 +318,7 @@ module decoder(
 				if(exe_mode == `CPU_KERNEL_MODE)
 				begin
 					alu_in_0 = creg_rd_data;
-					gpr_we_ = `ENABLE;
+					gpr_we_ = `ENABLE_;
 				end
 				else
 				begin

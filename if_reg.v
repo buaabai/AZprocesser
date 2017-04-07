@@ -13,11 +13,11 @@ module if_reg(
 );
 
 	input clk,reset;
-	input[31:0] insn;
+	input wire[31:0] insn;
 	input stall,flush;
-	input[29:0] new_pc;
+	input wire[29:0] new_pc;
 	input br_taken;
-	input[29:0] br_addr;
+	input wire[29:0] br_addr;
 	output if_en;
 	
 	output[29:0] if_pc;

@@ -49,7 +49,7 @@ module mem_ctrl(
 					if(offset == `BYTE_OFFSET_WORD)
 					begin
 						out = rd_data;
-						as_ = `ENABLE;
+						as_ = `ENABLE_;
 					end
 					else
 					begin
@@ -61,7 +61,7 @@ module mem_ctrl(
 					if(offset == `BYTE_OFFSET_WORD)
 					begin
 						rw = `WRITE;
-						as_ = `ENABLE;
+						as_ = `ENABLE_;
 					end
 					else
 					begin

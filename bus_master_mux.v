@@ -36,28 +36,28 @@ module bus_master_mux(
 	
 	always@(*)
 	begin
-		if(m0_grnt_ == `ENABLE)
+		if(m0_grnt_ == `ENABLE_)
 		begin
 			s_addr = m0_addr;
 			s_as_ = m0_as_;
 			s_rw = m0_rw;
 			s_wr_data = m0_wr_data;
 		end
-		else if(m1_grnt_ == `ENABLE)
+		else if(m1_grnt_ == `ENABLE_)
 		begin
 			s_addr = m1_addr;
 			s_as_ = m1_as_;
 			s_rw = m1_rw;
 			s_wr_data = m1_wr_data;
 		end
-		else if(m2_grnt_ == `ENABLE)
+		else if(m2_grnt_ == `ENABLE_)
 		begin
 			s_addr = m2_addr;
 			s_as_ = m2_as_;
 			s_rw = m2_rw;
 			s_wr_data = m2_wr_data;
 		end
-		else if(m3_grnt_ == `ENABLE)
+		else if(m3_grnt_ == `ENABLE_)
 		begin
 			s_addr = m3_addr;
 			s_as_ = m3_as_;

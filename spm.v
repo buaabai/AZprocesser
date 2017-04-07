@@ -27,7 +27,7 @@ module spm(
 	
 	always@(*)
 	begin
-		if((if_spm_as_ == `ENABLE)&&(if_spm_rw == `WRITE))
+		if((if_spm_as_ == `ENABLE_)&&(if_spm_rw == `WRITE))
 		begin
 			wea = `MEM_ENABLE;
 		end
@@ -35,7 +35,7 @@ module spm(
 		begin
 			wea = `MEM_DISABLE;
 		end
-		if((mem_spm_as_ == `ENABLE) && (mem_spm_rw == `WRITE))
+		if((mem_spm_as_ == `ENABLE_) && (mem_spm_rw == `WRITE))
 		begin
 			web = `MEM_ENABLE;
 		end

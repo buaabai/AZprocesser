@@ -10,8 +10,8 @@ module rom(
 );
 	input clk,reset;
 	input cs_,as_;
-	input[10:0] addr;
-	output[31:0] rd_data;
+	input wire[10:0] addr;
+	output wire[31:0] rd_data;
 	output rdy_;
 	
 	reg rdy_;
@@ -31,13 +31,13 @@ module rom(
 		end
 		else
 		begin
-			if((cs_ == `ENABLE) && (as_ == `ENABLE))
+			if((cs_ == `ENABLE_) && (as_ == `ENABLE_))
 			begin
-				rdy_ <= #1 `ENABLE;
+				rdy_ <= #1 `ENABLE_;
 			end
 			else 
 			begin
-				rdy_ <= #1 `DISABLE;
+				rdy_ <= #1 `DISABLE_;
 			end
 		end
 	end

@@ -20,13 +20,13 @@ module bus_if(
 	
 	input stall,flush;
 	
-	input[29:0] addr;
+	input wire[29:0] addr;
 	input as_,rw;
-	input[31:0] wr_data;
+	input wire[31:0] wr_data;
 	
-	input[31:0] spm_rd_data;
+	input wire[31:0] spm_rd_data;
 	
-	input[31:0] bus_rd_data;
+	input wire[31:0] bus_rd_data;
 	input bus_rdy_,bus_grnt_;
 	
 	output busy;
@@ -65,18 +65,18 @@ module bus_if(
 	begin
 		rd_data = `WORD_DATA_W'h0;
 		spm_as_ = `DISABLE_;
-		busy = `DISABLE_;
+		busy = `DISABLE;
 		
 		case(state)
 			`BUS_IF_STATE_IDLE:
 			begin
-				if((flush == `DISABLE) && (as_ == `ENABLE))
+				if((flush == `DISABLE) && (as_ == `ENABLE_))
 				begin
 					if((s_index == `BUS_SLAVE_1))
 					begin
 						if(stall == `DISABLE)
 						begin
-							spm_as_ = `ENABLE;
+							spm_as_ = `ENABLE_;
 							if(rw == `READ)
 							begin
 								rd_data = spm_rd_data;
@@ -95,7 +95,7 @@ module bus_if(
 			end
 			`BUS_IF_STATE_ACCESS:
 			begin
-				if(bus_rdy_ == `ENABLE)
+				if(bus_rdy_ == `ENABLE_)
 				begin
 					if(rw == `READ)
 					begin
@@ -111,7 +111,7 @@ module bus_if(
 			begin
 				if(rw == `READ)
 				begin
-					rd_data =rd_buf;
+					rd_data = rd_buf;
 				end
 			end
 		endcase
@@ -134,12 +134,12 @@ module bus_if(
 			case(state)
 			`BUS_IF_STATE_IDLE:
 			begin
-				if((flush == `DISABLE) && (as_ == `ENABLE))
+				if((flush == `DISABLE) && (as_ == `ENABLE_))
 				begin
 					if(s_index != `BUS_SLAVE_1)
 					begin
 						state <= #1 `BUS_IF_STATE_REQ;
-						bus_req_ <= #1 `ENABLE;
+						bus_req_ <= #1 `ENABLE_;
 						bus_addr <= #1 addr;
 						bus_rw <= #1 rw;
 						bus_wr_data <= #1 wr_data;
@@ -148,15 +148,15 @@ module bus_if(
 			end
 			`BUS_IF_STATE_REQ:
 			begin
-				if(bus_grnt_ == `ENABLE)
+				if(bus_grnt_ == `ENABLE_)
 				begin
 					state <= #1 `BUS_IF_STATE_ACCESS;
-					bus_as_ <= #1 `ENABLE;
+					bus_as_ <= #1 `ENABLE_;
 				end
 			end
 			`BUS_IF_STATE_ACCESS:
 			begin
-				bus_as_ <= #1 `DISABLE;
+				bus_as_ <= #1 `DISABLE_;
 				if(bus_rdy_ == `ENABLE_)
 				begin
 					bus_req_ <= #1 `DISABLE_;
