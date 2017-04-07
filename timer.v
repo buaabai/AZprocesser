@@ -10,7 +10,7 @@ module timer(clk,reset,cs_,as_,rw,addr,wr_data,
 	
 	input clk,reset;
 	input cs_,as_,rw;
-	input[1:0] addr;
+	input[29:0] addr;
 	input[31:0] wr_data;
 	output[31:0] rd_data;
 	output rdy_;
@@ -54,7 +54,7 @@ module timer(clk,reset,cs_,as_,rw,addr,wr_data,
 			if((cs_ == `ENABLE_) && (as_ == `ENABLE_)
 				&& (rw == `READ))
 			begin
-				case(addr)
+				case(addr[1:0])
 					`TIMER_ADDR_CTRL:
 					begin
 						rd_data <= #1 {{`WORD_DATA_W-2{1'b0}},mode,start};

@@ -12,7 +12,7 @@ module uart_ctrl(clk,reset,cs_,as_,rw,addr,wr_data,
 	input clk,reset;
 	input cs_,as_;
 	input rw;
-	input addr;
+	input[29:0] addr;
 	input[31:0] wr_data;
 	
 	input rx_busy;
@@ -61,7 +61,7 @@ module uart_ctrl(clk,reset,cs_,as_,rw,addr,wr_data,
 			if((cs_ == `ENABLE_) && (as_ == `ENABLE_)
 			 && (rw == `READ))
 			begin
-				case(addr)
+				case(addr[0:0])
 					`UART_ADDR_STATUS:
 					begin
 						rd_data <= #1 {{`WORD_DATA_W-4{1'b0}},

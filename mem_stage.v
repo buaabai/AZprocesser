@@ -32,7 +32,7 @@ module mem_stage(busy,spm_rd_data,spm_addr,spm_as_,spm_rw,
 	input[2:0] ex_exp_code;
 	
 	output busy;
-	output[29:0] spm_addr;
+	output[11:0] spm_addr;
 	output spm_as_;
 	output spm_rw;
 	output[31:0] spm_wr_data;

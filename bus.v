@@ -26,8 +26,8 @@ module bus(
 	input m0_addr,m1_addr,m2_addr,m3_addr;
 	input m0_as_,m1_as_,m2_as_,m3_as_;
 	input m0_rw,m1_rw,m2_rw,m3_rw;
-	input[31:0] m0_wr_data,m1_wr_data;
-	input[31:0] m2_wr_data,m3_wr_data;
+	input wire[31:0] m0_wr_data,m1_wr_data;
+	input wire[31:0] m2_wr_data,m3_wr_data;
 	
 	output m0_grnt_,m1_grnt_,m2_grnt_,m3_grnt_;
 	output[31:0] m_rd_data;
@@ -40,10 +40,10 @@ module bus(
 	output s0_cs_,s1_cs_,s2_cs_,s3_cs_;
 	output s4_cs_,s5_cs_,s6_cs_,s7_cs_;
 	
-	input[31:0] s0_rd_data,s1_rd_data;
-	input[31:0] s2_rd_data,s3_rd_data;
-	input[31:0] s4_rd_data,s5_rd_data;
-	input[31:0] s6_rd_data,s7_rd_data;
+	input wire[31:0] s0_rd_data,s1_rd_data;
+	input wire[31:0] s2_rd_data,s3_rd_data;
+	input wire[31:0] s4_rd_data,s5_rd_data;
+	input wire[31:0] s6_rd_data,s7_rd_data;
 	input s0_rdy_,s1_rdy_,s2_rdy_,s3_rdy_;
 	input s4_rdy_,s5_rdy_,s6_rdy_,s7_rdy_;
 	

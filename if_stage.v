@@ -29,7 +29,7 @@ module if_stage(
 	output if_en;
 	
 	output busy;
-	output[29:0] spm_addr;
+	output[11:0] spm_addr;
 	output spm_as_;
 	output spm_rw;
 	output[31:0] spm_wr_data;

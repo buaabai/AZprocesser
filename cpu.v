@@ -40,7 +40,7 @@ module cpu(reset,clk,if_bus_rd_data,if_bus_rdy_,if_bus_grnt_,if_bus_req_,
 	wire if_spm_as_;
 	wire if_spm_rw;
 	wire[31:0] if_spm_wr_data;
-
+	
 	wire[31:0] mem_spm_rd_data,mem_spm_wr_data;
 	wire[11:0] mem_spm_addr;
 	wire[4:0] creg_rd_addr;
@@ -58,6 +58,25 @@ module cpu(reset,clk,if_bus_rd_data,if_bus_rdy_,if_bus_grnt_,if_bus_req_,
 	wire[2:0] id_exp_code;
 	wire[31:0] gpr_rd_data_0,gpr_rd_data_1;
 	wire[4:0] gpr_rd_addr_0,gpr_rd_addr_1;
+	wire[4:0] mem_dst_addr;
+	
+	wire[2:0] mem_exp_code;
+	wire[31:0] mem_out;
+	
+	wire[29:0] ex_pc;
+	wire[1:0] ex_mem_op;
+	wire[31:0] ex_mem_wr_data;
+	wire[1:0] ex_ctrl_op;
+	wire[2:0] ex_exp_code;
+	wire[31:0] ex_out;
+	
+	wire[31:0] spm_rd_data;
+	wire[11:0] spm_addr;
+	wire[31:0] spm_wr_data;
+	wire[29:0] mem_pc;
+	wire[1:0] mem_ctrl_op;
+	
+	
 	
 	if_stage if_stage(.reset(reset),.clk(clk),.bus_rd_data(if_bus_rd_data),
 		.bus_rdy_(if_bus_rdy_),.bus_grnt_(if_bus_grnt_),.bus_req_(if_bus_req_),
@@ -80,7 +99,7 @@ module cpu(reset,clk,if_bus_rd_data,if_bus_rdy_,if_bus_grnt_,if_bus_req_,
 		.gpr_rd_data_0(gpr_rd_data_0),.gpr_rd_addr_0(gpr_rd_addr_0),.gpr_rd_addr_1(gpr_rd_addr_1),.gpr_rd_data_1(gpr_rd_data_1));
 	
 	gpr gpr(.rd_addr_0(gpr_rd_addr_0),.rd_data_0(gpr_rd_data_0),.rd_addr_1(gpr_rd_addr_1),.rd_data_1(gpr_rd_data_1),
-		.we_(mem_gpr_we_),.wr_addr(mem_dst_addr),.wr_data(mem_out));
+		.we_(mem_gpr_we_),.wr_addr(mem_dst_addr),.wr_data(mem_out),.clk(clk),.reset(reset));
 		
 	ex_stage ex_stage(.fwd_data(ex_fwd_data),.id_pc(id_pc),.id_en(id_en),.id_alu_op(id_alu_op),.id_alu_in_0(id_alu_in_0),
 		.id_alu_in_1(id_alu_in_1),.id_br_flag(id_br_flag),.id_mem_op(id_mem_op),.id_mem_wr_data(id_mem_wr_data),
@@ -97,11 +116,9 @@ module cpu(reset,clk,if_bus_rd_data,if_bus_rdy_,if_bus_grnt_,if_bus_req_,
 		.bus_rd_data(mem_bus_rd_data),.bus_rdy_(mem_bus_rdy_),.bus_grnt_(mem_bus_grnt_),.bus_req_(mem_bus_req_),.bus_addr(mem_bus_addr),
 		.bus_as_(mem_bus_as_),.bus_rw(mem_bus_rw),.bus_wr_data(mem_bus_wr_data));
 	
-	ctrl ctrl(.reset(reset),.clk(clk),.id_pc(id_pc),.if_busy(if_busy),.if_stall(if_stall),.if_flush(if_flush),
-		.new_pc(new_pc),.creg_rd_addr(creg_rd_addr),
-		.ld_hazard(ld_hazard),.exe_mode(exe_mode),.creg_rd_data(creg_rd_data),.id_stall(id_stall),.id_flush(id_flush),
-		.int_detect(int_detect),.ex_stall(ex_stall),
+	ctrl ctrl(.reset(reset),.clk(clk),.id_pc(id_pc),.if_busy(if_busy),.if_stall(if_stall),.if_flush(if_flush),.new_pc(new_pc),.creg_rd_addr(creg_rd_addr),
+		.ld_hazard(ld_hazard),.exe_mode(exe_mode),.creg_rd_data(creg_rd_data),.id_stall(id_stall),.id_flush(id_flush),.int_detect(int_detect),.ex_stall(ex_stall),
 		.ex_flush(ex_flush),.mem_busy(mem_busy),.mem_stall(mem_stall),.mem_flush(mem_flush),.mem_pc(mem_pc),.mem_en(mem_en),.mem_br_flag(mem_br_flag),
-		.mem_ctrl_op(mem_ctrl_op),.mem_dst_addr(mem_dst_addr),.mem_exp_code(mem_exp_code),.mem_out(mem_out),.irq(cpu_irq));
+		.mem_ctrl_op(mem_ctrl_op),.mem_dst_addr(mem_dst_addr),.mem_exp_code(mem_exp_code),.mem_out(mem_out),.irq(cpu_irq),.mem_gpr_we_(mem_gpr_we_));
 		
 endmodule

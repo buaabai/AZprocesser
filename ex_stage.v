@@ -10,31 +10,31 @@ module ex_stage(fwd_data,id_pc,id_en,id_alu_op,id_alu_in_0,id_alu_in_1,
 	ex_mem_op,ex_mem_wr_data,ex_ctrl_op,ex_dst_addr,ex_gpr_we_,ex_exp_code,
 	ex_out);
 
-	input[29:0] id_pc;
+	input wire[29:0] id_pc;
 	input id_en;
-	input[3:0] id_alu_op;
-	input[31:0] id_alu_in_0,id_alu_in_1;
+	input wire[3:0] id_alu_op;
+	input wire[31:0] id_alu_in_0,id_alu_in_1;
 	input id_br_flag;
-	input[1:0] id_mem_op;
-	input[31:0] id_mem_wr_data;
-	input[1:0] id_ctrl_op;
-	input[4:0] id_dst_addr;
+	input wire[1:0] id_mem_op;
+	input wire[31:0] id_mem_wr_data;
+	input wire[1:0] id_ctrl_op;
+	input wire[4:0] id_dst_addr;
 	input id_gpr_we_;
-	input[2:0] id_exp_code;
+	input wire[2:0] id_exp_code;
 	input clk,reset;
 	input int_detect;
 	input stall,flush;
 	
-	output[31:0] fwd_data;
-	output[29:0] ex_pc;
+	output wire[31:0] fwd_data;
+	output wire[29:0] ex_pc;
 	output ex_en,ex_br_flag;
-	output[1:0] ex_mem_op;
-	output[31:0] ex_mem_wr_data;
-	output[1:0] ex_ctrl_op;
-	output[4:0] ex_dst_addr;
+	output wire[1:0] ex_mem_op;
+	output wire[31:0] ex_mem_wr_data;
+	output wire[1:0] ex_ctrl_op;
+	output wire[4:0] ex_dst_addr;
 	output ex_gpr_we_;
-	output[2:0] ex_exp_code;
-	output[31:0] ex_out;
+	output wire[2:0] ex_exp_code;
+	output wire[31:0] ex_out;
 	
 	wire[31:0] alu_out;
 	wire alu_of;

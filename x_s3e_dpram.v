@@ -12,7 +12,7 @@ module x_s3e_dpram(clka,wea,addra,dina,douta,
 	
 	output reg[31:0] douta,doutb;
 	
-	reg[31:0] mem[4095:0];
+	reg[31:0] mem[0:4095];
 	
 	always@(posedge clka)
 	begin

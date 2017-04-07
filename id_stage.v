@@ -55,14 +55,15 @@ module id_stage(
 	wire gpr_we_;
 	wire[2:0] exp_code;
 	
-	decoder decoder(.if_pc(if_pc),.if_insn(if_insn),.gpr_rd_data_0(gpr_rd_data_0),
+	decoder decoder(.if_pc(if_pc),.if_insn(if_insn),.if_en(if_en),.gpr_rd_data_0(gpr_rd_data_0),
 		.gpr_rd_data_1(gpr_rd_data_1),.gpr_rd_addr_0(gpr_rd_addr_0),.gpr_rd_addr_1(gpr_rd_addr_1),
 		.exe_mode(exe_mode),.creg_rd_addr(creg_rd_addr),.creg_rd_data(creg_rd_data),
 		.ex_fwd_data(ex_fwd_data),.ex_dst_addr(ex_dst_addr),.ex_gpr_we_(ex_gpr_we_),
 		.mem_fwd_data(mem_fwd_data),.br_addr(br_addr),.br_taken(br_taken),.ld_hazard(ld_hazard),
 		.alu_op(alu_op),.alu_in_0(alu_in_0),.alu_in_1(alu_in_1),.br_flag(br_flag),
 		.mem_op(mem_op),.mem_wr_data(mem_wr_data),.ctrl_op(ctrl_op),.dst_addr(dst_addr),
-		.gpr_we_(gpr_we_),.exp_code(exp_code));
+		.gpr_we_(gpr_we_),.exp_code(exp_code),.id_en(id_en),.id_dst_addr(id_dst_addr),
+		.id_gpr_we_(id_gpr_we_),.id_mem_op(id_mem_op),.ex_en(ex_en));
 	
 	id_reg id_reg(.if_pc(if_pc),.if_en(if_en),.alu_op(alu_op),.alu_in_0(alu_in_0),
 		.alu_in_1(alu_in_1),.br_flag(br_flag),.mem_op(mem_op),.mem_wr_data(mem_wr_data),

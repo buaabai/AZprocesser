@@ -8,7 +8,7 @@
 module decoder(
 	if_pc,if_insn,if_en,
 	gpr_rd_data_0,gpr_rd_data_1,gpr_rd_addr_0,gpr_rd_addr_1,
-	id_en,id_dst_addr,id_gpr_we_,id_dst_addr,id_mem_op,
+	id_en,id_dst_addr,id_gpr_we_,id_mem_op,
 	ex_en,ex_dst_addr,ex_gpr_we_,ex_fwd_data,
 	mem_fwd_data,
 	exe_mode,creg_rd_data,creg_rd_addr,

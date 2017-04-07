@@ -19,6 +19,10 @@ module spm(
 	
 	output[31:0] if_spm_rd_data,mem_spm_rd_data;
 	
+	wire[11:0] if_spm_addr,mem_spm_addr;
+	wire[31:0] if_spm_wr_data,mem_spm_wr_data;
+	wire[31:0] if_spm_rd_data,mem_spm_rd_data;
+	
 	reg wea,web;
 	
 	always@(*)
