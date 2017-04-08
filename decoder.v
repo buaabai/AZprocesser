@@ -16,7 +16,7 @@ module decoder(
 	mem_op,mem_wr_data,ctrl_op,dst_addr,gpr_we_,exp_code,ld_hazard
 );
 
-	output if_en;
+	input if_en;
 	input[31:0] gpr_rd_data_0,gpr_rd_data_1;
 	
 	input id_en;
@@ -34,8 +34,8 @@ module decoder(
 	input exe_mode;
 	input[31:0] creg_rd_data;
 	
-	output[29:0] if_pc;
-	output[31:0] if_insn;
+	input[29:0] if_pc;
+	input[31:0] if_insn;
 	
 	output[4:0] gpr_rd_addr_0;
 	output[4:0] gpr_rd_addr_1;
@@ -55,8 +55,8 @@ module decoder(
 	output[2:0] exp_code;
 	output ld_hazard;
 	
-	reg[29:0] if_pc;
-	reg[31:0] if_insn;
+	wire[29:0] if_pc;
+	wire[31:0] if_insn;
 	reg if_en;
 	
 	reg[3:0] alu_op;

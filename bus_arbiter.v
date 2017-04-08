@@ -1,36 +1,42 @@
-//总线仲裁器 轮询机制 round robin
-`define NEGATIVE_RESET
-`timescale 1ns/1ns
+/*
+ --FILE:	bus_arbiter,v
+*/
+/******* General Headfile *******/
 `include "global_config.h"
 `include "nettype.h"
 `include "stddef.h"
+/******* Bus Headfile ******/
 `include "bus.h"
-`define NEGATIVE_RESET
+
+/******* bus_arbiter *******/
 module bus_arbiter(
-		clk,reset,
-		m0_req_,m0_grnt_,
-		m1_req_,m1_grnt_,
-		m2_req_,m2_grnt_,
-		m3_req_,m3_grnt_
+	/******* clock & reset *******/
+	input wire clk,
+	input wire reset,
+	/******* master 0 *******/
+	input wire m0_req_,
+	output reg m0_grnt_,
+	/******* master 1 *******/
+	input wire m1_req_,
+	output reg m1_grnt_,
+	/******* master 2 *******/
+	input wire m2_req_,
+	output reg m2_grnt_,
+	/******* master 3 *******/
+	input wire m3_req_,
+	output reg m3_grnt_
 );
-	input clk,reset;
-	input m0_req_,m1_req_,m2_req_,m3_req_;
-	output m0_grnt_,m1_grnt_,m2_grnt_,m3_grnt_;
-	
-	wire clk,reset;
-	wire m0_req_,m1_req_,m2_req_,m3_req_;
-	
-	reg m0_grnt_,m1_grnt_,m2_grnt_,m3_grnt_;
-	
-	reg[1:0] owner;
-	
-	//赋予总线使用权
+	/******* signal inside *******/
+	reg[`BusOwnerBus] owner;
+	//give access to bus
 	always@(*)
 	begin
+		/******* initialization *******/
 		m0_grnt_ = `DISABLE_;
 		m1_grnt_ = `DISABLE_;
 		m2_grnt_ = `DISABLE_;
-		m3_grnt_ = `DISABLE_;  //初始化
+		m3_grnt_ = `DISABLE_;  
+		//
 		case(owner)
 			`BUS_OWNER_MASTER_0:
 				m0_grnt_ = `ENABLE_;
@@ -45,10 +51,12 @@ module bus_arbiter(
 	
 	always@(posedge clk or `RESET_EDGE reset)
 	begin
+		/******* asynchronous reset *******/
 		if(reset == `RESET_ENABLE)
 			owner <= #1 `BUS_OWNER_MASTER_0;
 		else
 		begin
+		/******* polling mechanism *******/
 			case(owner)
 				`BUS_OWNER_MASTER_0:
 				begin
@@ -97,4 +105,5 @@ module bus_arbiter(
 			endcase
 		end
 	end
+	
 endmodule

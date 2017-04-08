@@ -1,39 +1,47 @@
-`timescale 1ns/1ns
+/*
+ -- =====================================================================
+ FILE : bus_master_mux.v
+ -- =====================================================================
+*/
+/*******General Headfile*******/
 `include "global_config.h"
 `include "nettype.h"
 `include "stddef.h"
+/******* Bus Headfile*******/
 `include "bus.h"
+/******* master mux *******/
 module bus_master_mux(
-	m0_addr,m0_as_,m0_rw,m0_wr_data,m0_grnt_,
-	m1_addr,m1_as_,m1_rw,m1_wr_data,m1_grnt_,
-	m2_addr,m2_as_,m2_rw,m2_wr_data,m2_grnt_,
-	m3_addr,m3_as_,m3_rw,m3_wr_data,m3_grnt_,
-	s_addr,s_as_,s_rw,s_wr_data
+	//master 0
+	input wire[`WordAddrBus] m0_addr,
+	input wire m0_as_,
+	input wire m0_rw,
+	input wire[`WordDataBus] m0_wr_data,
+	input wire m0_grnt_,
+	//master 1
+	input wire[`WordAddrBus] m1_addr,
+	input wire m1_as_,
+	input wire m1_rw,
+	input wire[`WordDataBus] m1_wr_data,
+	input wire m1_grnt_,
+	//master 2
+	input wire[`WordAddrBus] m2_addr,
+	input wire m2_as_,
+	input wire m2_rw,
+	input wire[`WordDataBus] m2_wr_data,
+	input wire m2_grnt_,
+	//master 3
+	input wire[`WordAddrBus] m3_addr,
+	input wire m3_as_,
+	input wire m3_rw,
+	input wire[`WordDataBus] m3_wr_data,
+	input wire m3_grnt_,
+	//slave common signal
+	output reg[`WordAddrBus] s_addr,
+	output reg s_as_,
+	output reg s_rw,
+	output reg[`WordDataBus] s_wr_data
 );
-	input[29:0] m0_addr,m1_addr,m2_addr,m3_addr;
-	input m0_as_,m1_as_,m2_as_,m3_as_;
-	input m0_rw,m1_rw,m2_rw,m3_rw;
-	input m0_grnt_,m1_grnt_,m2_grnt_,m3_grnt_;
-	input[31:0] m0_wr_data,m1_wr_data;
-	input[31:0] m2_wr_data,m3_wr_data;
-	
-	output[29:0] s_addr;
-	output[31:0] s_wr_data;
-	output s_as_;
-	output s_rw;
-	
-	wire[29:0] m0_addr,m1_addr,m2_addr,m3_addr;
-	wire m0_as_,m1_as_,m2_as_,m3_as_;
-	wire m0_rw,m1_rw,m2_rw,m3_rw;
-	wire m0_grnt_,m1_grnt_,m2_grnt_,m3_grnt_;
-	wire[31:0] m0_wr_data,m1_wr_data;
-	wire[31:0] m2_wr_data,m3_wr_data;
-	
-	reg[29:0] s_addr;
-	reg[31:0] s_wr_data;
-	reg s_as_;
-	reg s_rw;
-	
+	/*******master mux *******/
 	always@(*)
 	begin
 		if(m0_grnt_ == `ENABLE_)
@@ -72,5 +80,6 @@ module bus_master_mux(
 			s_wr_data = `WORD_DATA_W'h0;
 		end
 	end
+	
 endmodule
 	

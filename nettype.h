@@ -1,6 +1,6 @@
 `ifndef __NETTYPE__HEADER__
 	`define __NETTYPE__HEADER__
 	
-	`default_nettype wire
+	`default_nettype none
 	
 `endif
